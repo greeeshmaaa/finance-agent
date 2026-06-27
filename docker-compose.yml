@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: finance-agent-db
+    environment:
+      POSTGRES_USER: finance
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_DB: finance_agent
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
