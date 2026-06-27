@@ -10,7 +10,17 @@ from agent.state import AgentState
 
 
 def load_opportunity(state: AgentState) -> dict:
-    """Load the highest-savings opportunity still in 'detected' status."""
+    """
+    Provide the opportunity to work on.
+
+    If the caller already seeded one (e.g. the UI injected a specific
+    opportunity_id + merchant), respect it. Otherwise, load the highest-savings
+    opportunity still in 'detected' status (the CLI default).
+    """
+    if state.get("merchant"):
+        print(f"  [load] Using provided opportunity: {state['merchant']}")
+        return {}
+
     session = SessionLocal()
     try:
         opp = (session.query(Opportunity)
@@ -42,7 +52,6 @@ def finalize(state: AgentState) -> dict:
     try:
         opp = session.get(Opportunity, state["opportunity_id"])
         if opp:
-            # Map the human decision to a terminal status on the opportunity
             opp.status = {
                 "approved": "approved_ready_to_send",
                 "edited": "approved_ready_to_send",
