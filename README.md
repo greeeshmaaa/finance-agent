@@ -45,12 +45,12 @@ Most "AI agent" demos wire a model directly to an action and hope for the best. 
                        │
                        ▼
         ┌──────────────────────────────────┐
-        │            Agent (LangGraph)       │
-        │  load → research → draft →         │
-        │     ┌───────────────────────┐      │
-        │     │  HUMAN APPROVAL (pause) │     │  ◀── agent never sends
-        │     └───────────────────────┘      │
-        │  → finalize                         │
+        │            Agent (LangGraph)     │
+        │  load → research → draft →       │
+        │     ┌───────────────────────┐    │
+        │     │HUMAN APPROVAL (pause) │    │  ◀── agent never sends
+        │     └───────────────────────┘    │
+        │  → finalize                      │
         └──────────────────────────────────┘
                        │
                        ▼
