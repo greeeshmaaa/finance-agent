@@ -27,3 +27,18 @@ class Transaction(Base):
 def init_db():
     """Create all tables if they don't already exist."""
     Base.metadata.create_all(engine)
+
+
+class Opportunity(Base):
+    __tablename__ = "opportunities"
+
+    id = Column(String, primary_key=True)         # deterministic: merchant+type
+    merchant = Column(String, nullable=False)
+    opportunity_type = Column(String, nullable=False)  # price_creep | recurring_subscription
+    current_price = Column(Float, nullable=False)
+    prior_price = Column(Float, nullable=True)     # null for plain subscriptions
+    pct_change = Column(Float, nullable=True)
+    monthly_amount = Column(Float, nullable=False)
+    est_annual_savings = Column(Float, nullable=False)
+    status = Column(String, server_default="detected")  # detected -> ... (agent updates later)
+    detected_at = Column(DateTime, server_default=func.now())
