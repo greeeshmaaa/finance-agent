@@ -65,6 +65,8 @@ Most "AI agent" demos wire a model directly to an action and hope for the best. 
 
 This is the core design principle, not an afterthought:
 
+![Architecture](assets/architecture.svg)
+
 - **The agent never sends anything.** It drafts messages and records decisions; the human performs the actual send. Approved items are marked `approved_ready_to_send`, not "sent."
 - **Human-in-the-loop on every money-adjacent action.** The LangGraph workflow *suspends* at an approval interrupt and cannot proceed until a human approves, edits, or rejects.
 - **Grounded outputs.** Drafts cite the actual detected figures (e.g. the real prior and current price), not invented numbers.
